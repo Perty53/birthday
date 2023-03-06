@@ -1,3 +1,5 @@
-let url = new URL(location.href);
+window.onload = ()=>{
+    
+}
 
-let 
+
