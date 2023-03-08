@@ -1,4 +1,20 @@
 body {
     color: #000;
+    background-color: #e07a7a;
 }
 
+div.main-content {
+    border: #575656 2px dotted;
+    display: flexbox;
+}
+
+h1 {
+    font-size: 1.3em;
+
+}
+
+ul li {
+    list-style: none;
+    text-align: left;
+    
+}
