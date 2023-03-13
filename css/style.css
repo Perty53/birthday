@@ -1,12 +1,26 @@
+*{
+    box-sizing: border-box;
+}
 body {
     color: #000;
     background-color: #e07a7a;
+    
 }
 
-div.main-content {
+#main-content {
     border: #575656 2px dotted;
-    display: flexbox;
+    /*display: flexbox;*/
+    height: 500px;
+    position: relative;
 }
+
+#initial-content{
+    color:red;
+    background-color: blanchedalmond;
+    position: absolute;
+    
+    
+}  
 
 h1 {
     font-size: 1.3em;
@@ -16,5 +30,14 @@ h1 {
 ul li {
     list-style: none;
     text-align: left;
+
+}
+
+.formAdjust{
+    border: blue 1px solid;
+    position: absolute;
+    top: 72px;
+    text-align: left;
+    width: 90%;
     
 }
