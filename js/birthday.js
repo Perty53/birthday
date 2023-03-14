@@ -16,11 +16,9 @@ window.onload = ()=>{
 }
 
 function addNewContent(){
-    let birth_form = $('#wishes-form'),
-    nameLabel = $('<label for ="name">Saisir le nom de la personne :</label>')
-    ;
-
-    birth_form.addClass("formAdjust");
-    birth_form.append(nameLabel)
-    
+    let formContainer = $('#form-container');
+    formContainer.append(fetch('../assets/form.html').then(resp => resp.text()).then(rep => formContainer.append(rep)));
+   
+    formContainer.addClass("formAdjust");
+      
 }
