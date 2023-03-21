@@ -23,20 +23,27 @@ function addNewContent() {
         formContainer.append(rep);
         formContainer.addClass("formAdjust");
 
-
-
         let month = $('#birth-month'),
             day = $("#birth-day"),
-            year = $("#birth-year"),
-            months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            year = $("#birth-year");
+            
+        setDateValues(day, month,year);
+
+
+    }));
+
+
+function setDateValues(day, month, year){
+    let months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
             days = (n) => {
                 for (let i = 1; i <= n; i++) {
-                    day.html(day.html() + "<option>" + i + "</option>");
+                    day.html(day.html() + "<option value='"+i+"'>" + i + "</option>");
                 }
             };
 
         for (let m = 0; m < months.length; m++) {
-            month.html(month.html() + "<option>" + months[m] + "</option>");
+            month.html(month.html() + "<option value='"+months[m]+"'>" + months[m] + "</option>");
+            // if(month.)
         }
 
         if (month === "Fevrier") {
@@ -48,16 +55,13 @@ function addNewContent() {
         }
 
         for (let as = 1950; as <= 2099; as++) {
-            year.html(year.html() + '<option>' + as + '</option>');
+            year.html(year.html() + "<option value='"+as+"'>" + as + '</option>');
 
             if (as % 400 === 0 || as % 100 !== 0 && as % 4 == 0) {
 
             }
 
         }
-
-    }));
-
-
+}
 }
 
