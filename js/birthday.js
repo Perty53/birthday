@@ -1,3 +1,5 @@
+//Probleme avec la selection dans les inputs
+
 window.onload = () => {
     let wish_btn = $('#wish-btn');
 
@@ -26,42 +28,49 @@ function addNewContent() {
         let month = $('#birth-month'),
             day = $("#birth-day"),
             year = $("#birth-year");
-            
-        setDateValues(day, month,year);
+
+        setDateValues(day, month, year);
 
 
     }));
 
 
-function setDateValues(day, month, year){
-    let months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+    function setDateValues(day, month, year) {
+        let months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            currentdate = new Date(),
             days = (n) => {
+                day.html('');
                 for (let i = 1; i <= n; i++) {
-                    day.html(day.html() + "<option value='"+i+"'>" + i + "</option>");
+                    day.html(day.html() + "<option value='" + i + "'" + (i === currentdate.getDate() ? 'selected' : '') + ">" + i + "</option>");
                 }
             };
-
-        for (let m = 0; m < months.length; m++) {
-            month.html(month.html() + "<option value='"+months[m]+"'>" + months[m] + "</option>");
-            // if(month.)
-        }
-
-        if (month === "Fevrier") {
-            day(28);
-        } else if (month === "Avril" || month === "Juin" || month === "Septembre" || month === "Novembre") {
-            days(30);
-        } else {
             days(31);
+        for (let m = 0; m < months.length; m++) {
+            month.html(month.html() + "<option value='" + months[m] + "'" + (m === currentdate.getMonth() ? 'selected' : '') + ">" + months[m] + "</option>");
+
         }
 
         for (let as = 1950; as <= 2099; as++) {
-            year.html(year.html() + "<option value='"+as+"'>" + as + '</option>');
+            year.html(year.html() + "<option value='" + as + "'" + (as === currentdate.getFullYear() ? 'selected' : '') + ">" + as + '</option>');
 
             if (as % 400 === 0 || as % 100 !== 0 && as % 4 == 0) {
 
             }
 
         }
-}
+
+        month.on('change', ()=>{
+            selectmonth = $('#birth-month option[selected]').html();
+            console.log(selectmonth)
+            if (selectmonth === "Février") {
+                day(28);
+            } else if (month === "Avril" || month === "Juin" || month === "Septembre" || month === "Novembre") {
+                days(30);
+            } else {
+                days(31);
+            }
+        })
+
+    }
 }
 
