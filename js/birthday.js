@@ -31,6 +31,17 @@ function addNewContent() {
 
         setDateValues(day, month, year);
 
+        let input = $('#upload_files'),
+            preview = $('.preview');
+        input.css('opacity', 0);
+        input.on('change', updateDislayImages);
+        
+        //A Continuer
+        function updateDislayImages() {
+            if(preview.firstChild){
+                preview.remove(preview.firstChild)
+            }
+        }   
 
     }));
 
@@ -44,14 +55,14 @@ function addNewContent() {
                     day.html(day.html() + "<option value='" + i + "'" + (i === currentdate.getDate() ? 'selected' : '') + ">" + i + "</option>");
                 }
             };
-            days(31);
+        days(31);
         for (let m = 0; m < months.length; m++) {
             month.html(month.html() + "<option value='" + months[m] + "'" + (m === currentdate.getMonth() ? 'selected' : '') + ">" + months[m] + "</option>");
 
         }
 
         for (let as = 1950; as <= 2099; as++) {
-            year.html(year.html() + "<option value='" + as + "'" + (as === currentdate.getFullYear() ? 'selected' : '') + ">" + as + '</option>');
+            year.html(year.html() + "<option value='" + as + "'" + (as === currentdate.getFullYear() ? 'selected=selected' : '') + ">" + as + '</option>');
 
             if (as % 400 === 0 || as % 100 !== 0 && as % 4 == 0) {
 
@@ -59,7 +70,7 @@ function addNewContent() {
 
         }
 
-        month.on('change', ()=>{
+        month.on('change', () => {
             selectmonth = $('#birth-month option[selected]').html();
             console.log(selectmonth)
             if (selectmonth === "Février") {
@@ -72,5 +83,8 @@ function addNewContent() {
         })
 
     }
-}
 
+
+
+    
+}

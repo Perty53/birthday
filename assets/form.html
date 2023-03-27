@@ -10,8 +10,11 @@
             <select name="birth-year" id="birth-year" title="Année" required></select>
         </div>
         <div id="files">
-            <input type="file">
-            <div id="preview"></div>
+            <label for="upload_files">Sélectionner un fichier</label>
+            <input type="file" name="upload_files" accept="image/*" multiple id="upload_files">
+            <div class="preview">
+                <p>Aucun fichier séléctionné</p>
+            </div>
         </div>
         <div id="wishes">
             <input type="text" name="wishe-1" id="wishe-1">
