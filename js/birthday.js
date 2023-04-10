@@ -21,8 +21,9 @@ window.onload = () => {
 
 function addNewContent() {
     let formContainer = $('#form-container');
-    formContainer.append(fetch('../assets/form.html').then(resp => resp.text()).then(rep => {
-        formContainer.append(rep);
+    formContainer.removeAttr('hidden')
+    /*.append(fetch('../assets/form.html').then(resp => resp.text()).then(rep => {
+        formContainer.append(rep);*/
         formContainer.addClass("formAdjust");
 
         let month = $('#birth-month'),
@@ -36,6 +37,7 @@ function addNewContent() {
 
         input.css('opacity', 0);
         input.on('change', updateDislayImages);
+        preview.addClass('formtwo')
 
         //A Continuer
         function updateDislayImages() {
@@ -50,28 +52,32 @@ function addNewContent() {
             if (currentFiles.length === 0) {
                 preview.html('<p>Aucun fichier sélectionné<p>')
             } else {
-
+                let listImg = $('<ol></ol>');
                 for (let i = 0; i < currentFiles.length; i++) {
                     let currFile = currentFiles[i];
-                    let listImg = $('<ol></ol>');
+
                     preview.append(listImg);
                     console.log(currFile.type)
                     if (validFileType(currFile)) {
                         console.log("YEESS")
                         let imageItem = $('<li></li>'),
-                            params = $('<p></p>'),
-                            img = $('<img width=70 height = 80/>');
+                            params = $('<div></div>'),
+                            img = $('<img />');
+                            imgContainer = $('<div></div>');
+                            imgContainer.addClass('containerImg')
+                            
+                            params.html('<div>Nom du fichier : ' + currFile.name + '</div><div>Taille : ' + fileSize(currFile.size));
+                            
+                            img.attr('src', window.URL.createObjectURL(currFile));
+                            
+                            imgContainer.css('background-image', 'url('+img.attr('src')+')');
 
-                        params.html('<div>Nom du fichier : ' + currFile.name + '</div><div>Taille : ' + fileSize(currFile.size));
-
-                        img.attr('src', window.URL.createObjectURL(currFile));
-                        console.log(img.get(0))
-                        imageItem.append(img)
+                        imageItem.append(imgContainer);
                         params.appendTo(imageItem);
                         imageItem.appendTo(listImg)
 
                     } else {
-                        alert(currFile.name+' n\'est pas un fichier de type valide !!!')
+                        alert(currFile.name + ' n\'est pas un fichier de type valide !!!')
                     }
                 }
             }
@@ -85,8 +91,8 @@ function addNewContent() {
                 return (size / 1048576).toFixed(1) + ' Mo'
             else
                 return size + ' o';
-    }
-        
+        }
+
         function validFileType(file) {
             const fileTypes = ['image/jpg',
                 'image/jpeg',
@@ -101,46 +107,46 @@ function addNewContent() {
             return false;
 
         }
-    }));
+    //}));
 
 
-function setDateValues(day, month, year) {
-    let months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-        currentdate = new Date(),
-        days = (n) => {
-            day.html('');
-            for (let i = 1; i <= n; i++) {
-                day.html(day.html() + "<option value='" + i + "'" + (i === currentdate.getDate() ? 'selected' : '') + ">" + i + "</option>");
+    function setDateValues(day, month, year) {
+        let months = ['Janvier', "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            currentdate = new Date(),
+            days = (n) => {
+                day.html('');
+                for (let i = 1; i <= n; i++) {
+                    day.html(day.html() + "<option value='" + i + "'" + (i === currentdate.getDate() ? 'selected' : '') + ">" + i + "</option>");
+                }
+            };
+        days(31);
+        for (let m = 0; m < months.length; m++) {
+            month.html(month.html() + "<option value='" + months[m] + "'" + (m === currentdate.getMonth() ? 'selected' : '') + ">" + months[m] + "</option>");
+
+        }
+
+        for (let as = 1950; as <= 2099; as++) {
+            year.html(year.html() + "<option value='" + as + "'" + (as === currentdate.getFullYear() ? 'selected=selected' : '') + ">" + as + '</option>');
+
+            if (as % 400 === 0 || as % 100 !== 0 && as % 4 == 0) {
+
             }
-        };
-    days(31);
-    for (let m = 0; m < months.length; m++) {
-        month.html(month.html() + "<option value='" + months[m] + "'" + (m === currentdate.getMonth() ? 'selected' : '') + ">" + months[m] + "</option>");
-
-    }
-
-    for (let as = 1950; as <= 2099; as++) {
-        year.html(year.html() + "<option value='" + as + "'" + (as === currentdate.getFullYear() ? 'selected=selected' : '') + ">" + as + '</option>');
-
-        if (as % 400 === 0 || as % 100 !== 0 && as % 4 == 0) {
 
         }
 
+        month.on('change', () => {
+            selectmonth = $('#birth-month option[selected]').html();
+            console.log(selectmonth)
+            if (selectmonth === "Février") {
+                day(28);
+            } else if (month === "Avril" || month === "Juin" || month === "Septembre" || month === "Novembre") {
+                days(30);
+            } else {
+                days(31);
+            }
+        })
+
     }
-
-    month.on('change', () => {
-        selectmonth = $('#birth-month option[selected]').html();
-        console.log(selectmonth)
-        if (selectmonth === "Février") {
-            day(28);
-        } else if (month === "Avril" || month === "Juin" || month === "Septembre" || month === "Novembre") {
-            days(30);
-        } else {
-            days(31);
-        }
-    })
-
-}
 
 
 

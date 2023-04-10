@@ -24,7 +24,30 @@
                     <button id="wish-btn"> Cliquez ici</button>
                 </div>
                
-                <div id="form-container"></div>
+                <div id="form-container"  hidden>
+                    <form id="wishes-form" method="POST" action="">
+                        <label for="name">Saisir le nom de la personne :</label>
+                        <input type="text" name="name" class="formone">
+                        <div id="birthday">Entrer sa date de naisance :
+                            <div class="row"><select class="formtwo col-4" name="birth-day" id="birth-day" title="Jour" required></select>
+                            <select class="formtwo col-4" name="birth-month" id="birth-month" title="Mois" required></select>
+                            <select class="formtwo col-4" name="birth-year" id="birth-year" title="Année" required></select></div>
+                        </div>
+                        <div id="files">
+                            <label for="upload_files">Sélectionner un fichier</label>
+                            <input type="file" name="upload_files" accept=".jpg, .jpeg, .png" multiple id="upload_files">
+                            <div class="preview">
+                                <p>Aucun fichier séléctionné</p>
+                            </div>
+                        </div>
+                        <div id="wishes">
+                            <input class="formone" type="text" name="wishe-1" id="wishe-1">
+                            <input type="text" class="formone" name="wishe-2" id="wishe-2">
+                            <input type="text" class="formone" name="wishe-3" id="wishe-3">
+                        </div>
+                        <input type="submit" value="Envoyer">
+                    </form>
+                </div>
                 <div class="col-lg-4"></div>
             </div>
         </div>
