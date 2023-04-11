@@ -21,7 +21,8 @@ window.onload = () => {
 
 function addNewContent() {
     let formContainer = $('#form-container');
-    formContainer.removeAttr('hidden')
+    formContainer.removeAttr('hidden');
+    //$('#main-content').css('height', formContainer.height())
     /*.append(fetch('../assets/form.html').then(resp => resp.text()).then(rep => {
         formContainer.append(rep);*/
         formContainer.addClass("formAdjust");

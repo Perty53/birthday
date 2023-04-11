@@ -21,8 +21,10 @@ body {
 #main-content {
     border: #575656 2px dotted;
     /*display: flexbox;*/
-    height: 500px;
+    min-height: 500px;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 
