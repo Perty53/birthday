@@ -61,12 +61,12 @@ function addNewContent() {
                     if (validFileType(currFile)) {
                         console.log("YEESS")
                         let imageItem = $('<li></li>'),
-                            params = $('<div></div>'),
+                            params = $('<div class="infos"></div>'),
                             img = $('<img />');
-                            imgContainer = $('<div></div>');
+                            imgContainer = $('<div><span class="material-symbols-outlined">open_in_full</span></div>');
                             imgContainer.addClass('containerImg')
                             
-                            params.html('<div>Nom du fichier : ' + currFile.name + '</div><div>Taille : ' + fileSize(currFile.size));
+                            params.html('<div><p>'+currFile.name + '</p><p>' + fileSize(currFile.size)+'</p></div>');
                             
                             img.attr('src', window.URL.createObjectURL(currFile));
                             
